@@ -16,6 +16,7 @@ import java.util.UUID;
 public class Hall {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true,nullable = false)
     private UUID sysid;
     @Column(unique = true)
     private String hallID;

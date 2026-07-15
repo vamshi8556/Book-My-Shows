@@ -16,6 +16,7 @@ import java.util.UUID;
 public class Show {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, nullable = false)
     private UUID sysid;
     private String showID;
     private Double showPrice;

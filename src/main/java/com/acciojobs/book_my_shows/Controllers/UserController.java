@@ -7,6 +7,7 @@ import com.acciojobs.book_my_shows.models.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +24,10 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping("/register/customer")
-    public User CreateCustomer(@RequestBody User user){
-        System.out.println(user);
-        return user;
+    public ResponseEntity<User> CreateCustomer(@RequestBody UserRequestDto userRequestDto){
+        log.info(String.format("Received user request registration %s",userRequestDto.toString()));
+        User user = userService.registerCustomer(userRequestDto);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @PostMapping("/register/TheaterOwner")

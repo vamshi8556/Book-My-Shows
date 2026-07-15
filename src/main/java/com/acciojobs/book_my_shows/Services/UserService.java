@@ -25,4 +25,9 @@ public class UserService {
         this.userRepository.save(user);
         return user;
     }
+    public User registerCustomer(UserRequestDto userRequestDto){
+        User user = applicationTransformer.TransformUserRequestDtoToUserModel(userRequestDto, UserType.CUSTOMER.toString());
+        this.userRepository.save(user);
+        return user;
+    }
 }

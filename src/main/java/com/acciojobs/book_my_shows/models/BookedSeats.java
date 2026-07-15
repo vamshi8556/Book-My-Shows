@@ -15,8 +15,8 @@ import java.util.UUID;
 public class BookedSeats {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID sysid;
     @Column(unique = true, nullable = false)
+    private UUID sysid;
     private String seatID;
     private String bookingID;
     @ManyToOne

@@ -16,6 +16,7 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, nullable = false)
     private UUID sysid;
     private String userID;
     private String userName;
