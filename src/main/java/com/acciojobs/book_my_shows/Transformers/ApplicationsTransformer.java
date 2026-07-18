@@ -1,8 +1,10 @@
 package com.acciojobs.book_my_shows.Transformers;
 
+import com.acciojobs.book_my_shows.Dtos.HallRequestDto;
 import com.acciojobs.book_my_shows.Dtos.TheaterRequestDTO;
 import com.acciojobs.book_my_shows.Dtos.UserRequestDto;
 import com.acciojobs.book_my_shows.Utilities.SystemUtility;
+import com.acciojobs.book_my_shows.models.Hall;
 import com.acciojobs.book_my_shows.models.Theater;
 import com.acciojobs.book_my_shows.models.User;
 import org.springframework.stereotype.Component;
@@ -40,8 +42,21 @@ public class ApplicationsTransformer {
                 .owner(user)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .createdBy("system")
-                .updatedBy("system")
+                .createdBy(user.getEmail())
+                .updatedBy(user.getEmail())
+                .build();
+    }
+    public Hall TransformHallDtotoHallModel(HallRequestDto hallRequestDto, Theater theater){
+        return Hall.builder()
+                .hallID(SystemUtility.generateUserId())
+                .hallName(hallRequestDto.getHallName())
+                .theater(theater)
+                .rowRange(hallRequestDto.getRowRange())
+                .seatCapacity(hallRequestDto.getSeatCapacity())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .createdBy(theater.getOwner().getEmail())
+                .updatedBy(theater.getOwner().getEmail())
                 .build();
     }
 

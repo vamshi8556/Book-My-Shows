@@ -8,8 +8,11 @@ import com.acciojobs.book_my_shows.models.User;
 import com.acciojobs.book_my_shows.repositories.TheaterRepository;
 import com.acciojobs.book_my_shows.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.naming.directory.InvalidAttributesException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -31,5 +34,12 @@ public class TheaterService {
         Theater theater = applicationsTransformer.TransformTheaterRequestDTOtoTheaterModel(theaterRequestDTO, user);
         theaterRepository.save(theater);
         return theater;
+    }
+    public Theater verifyTherater(UUID theatersysid)throws InvalidAttributesException{
+        Optional<Theater> theater = theaterRepository.findById(theatersysid);
+        if(theater.isEmpty()){
+            throw new InvalidAttributesException("invalid user details");
+        }
+        return theater.get();
     }
 }
