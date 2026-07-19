@@ -6,6 +6,7 @@ import com.acciojobs.book_my_shows.Exceptions.UserNotFoundException;
 import com.acciojobs.book_my_shows.Services.HallService;
 import com.acciojobs.book_my_shows.Services.UserService;
 import com.acciojobs.book_my_shows.models.Hall;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1/Hall")
 public class HallController {
     private HallService hallService;
+    @Autowired
     public HallController(HallService hallService){
         this.hallService = hallService;
     }

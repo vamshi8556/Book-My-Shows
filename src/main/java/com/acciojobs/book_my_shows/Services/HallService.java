@@ -8,9 +8,11 @@ import com.acciojobs.book_my_shows.models.Theater;
 import com.acciojobs.book_my_shows.models.User;
 import com.acciojobs.book_my_shows.repositories.HallRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.directory.InvalidAttributesException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -21,6 +23,7 @@ public class HallService {
     private  TheaterService theaterService;
     private HallRepository hallRepository;
     private ApplicationsTransformer applicationsTransformer;
+    @Autowired
     public HallService(UserService userService, TheaterService theaterService, HallRepository hallRepository, ApplicationsTransformer applicationsTransformer){
         this.userService = userService;
         this.theaterService = theaterService;
@@ -36,5 +39,12 @@ public class HallService {
         Hall hall = applicationsTransformer.TransformHallDtotoHallModel(hallRequestDto, theater);
         hallRepository.save(hall);
         return hall;
+    }
+    public Hall verifyHall(UUID hallsysid) throws InvalidAttributesException{
+        Optional<Hall> hall = hallRepository.findById(hallsysid);
+        if(hall.isEmpty()){
+            throw new InvalidAttributesException("invalid hallid passed");
+        }
+        return hall.get();
     }
 }

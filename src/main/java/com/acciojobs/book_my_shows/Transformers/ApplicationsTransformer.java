@@ -1,10 +1,12 @@
 package com.acciojobs.book_my_shows.Transformers;
 
 import com.acciojobs.book_my_shows.Dtos.HallRequestDto;
+import com.acciojobs.book_my_shows.Dtos.ShowRequestDto;
 import com.acciojobs.book_my_shows.Dtos.TheaterRequestDTO;
 import com.acciojobs.book_my_shows.Dtos.UserRequestDto;
 import com.acciojobs.book_my_shows.Utilities.SystemUtility;
 import com.acciojobs.book_my_shows.models.Hall;
+import com.acciojobs.book_my_shows.models.Show;
 import com.acciojobs.book_my_shows.models.Theater;
 import com.acciojobs.book_my_shows.models.User;
 import org.springframework.stereotype.Component;
@@ -57,6 +59,22 @@ public class ApplicationsTransformer {
                 .updatedAt(LocalDateTime.now())
                 .createdBy(theater.getOwner().getEmail())
                 .updatedBy(theater.getOwner().getEmail())
+                .build();
+    }
+    public Show TransformShowRequestDtoToShowModel(ShowRequestDto showRequestDto, Hall hall, User user, Long StartTimeInSeconds, Long EndTimeInSeconds){
+        return Show.builder()
+                .hall(hall)
+                .showID(SystemUtility.generateUserId())
+                .showPrice(showRequestDto.getShowPrice())
+                .movieName(showRequestDto.getMovieName())
+                .StartTimeInSeconds(StartTimeInSeconds)
+                .EndTimeInSeconds(EndTimeInSeconds)
+                .startTime(showRequestDto.getStartTime())
+                .endTime(showRequestDto.getEndTime())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .createdBy(user.getEmail())
+                .updatedBy(user.getEmail())
                 .build();
     }
 

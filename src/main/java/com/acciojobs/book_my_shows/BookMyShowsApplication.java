@@ -15,18 +15,16 @@ public class BookMyShowsApplication {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
-
         return new WebMvcConfigurer() {
 
             @Override
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
-                        .allowedMethods("*")
+                        .allowedOrigins("http://localhost:5500")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
-
         };
     }
 
